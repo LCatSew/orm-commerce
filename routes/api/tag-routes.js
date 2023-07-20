@@ -1,9 +1,10 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
 
-router.get('/', async (req, res) => {
+router.get('/api/tags', async (req, res) => {
   // find all tags
   // be sure to include its associated Product data
     try {
@@ -18,10 +19,11 @@ router.get('/', async (req, res) => {
 
     } catch (err) {
         res.status(500).json(err);
+        console.log(err);
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get(`api/tags/:id`, async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
     try {
@@ -42,7 +44,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/api/tags', async (req, res) => {
   // create a new tag
     try {
         const newTag = await Tag.create({
@@ -54,7 +56,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('api/tags/:id', async (req, res) => {
   // update a tag's name by its `id` value
     try {
         const [rowsUpdated] = await Tag.update({
