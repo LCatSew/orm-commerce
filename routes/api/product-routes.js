@@ -122,13 +122,19 @@ router.delete('/api/products/:id', async (req, res) => {
             return;
         }
         await ProductTag.destroy({ where: { product_id: req.params.id } });
-        await Product.destroy({
-            where: {
-                id: req.params.id,
+        await Product.destroy({ where: {id: req.params.id } });
+        
+		res.status(200).json({
+            message: 'Product was removed from the database', 
+            deletedProduct: {
+                
+                    id: deletedProduct.id,
+                    product_name: deletedProduct.product_name,
+                    price: deletedProduct.price,
+                    stock: deletedProduct.stock,
+                    category_id: deletedProduct.category_id,
             },
         });
-
-		res.json(`${deletedProduct} was removed from the database`);
     } catch (err) {
         console.log(err);
         res.json(err);
