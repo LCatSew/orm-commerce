@@ -4,7 +4,7 @@ const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
 
-router.get('/api/tags', async (req, res) => {
+router.get('/', async (req, res) => {
   // find all tags
   // be sure to include its associated Product data
     try {
@@ -23,7 +23,7 @@ router.get('/api/tags', async (req, res) => {
     }
 });
 
-router.get(`api/tags/:id`, async (req, res) => {
+router.get(`/:id`, async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
     try {
@@ -44,7 +44,7 @@ router.get(`api/tags/:id`, async (req, res) => {
     }
 });
 
-router.post('/api/tags', async (req, res) => {
+router.post('/', async (req, res) => {
   // create a new tag
     try {
         const newTag = await Tag.create({
@@ -56,7 +56,7 @@ router.post('/api/tags', async (req, res) => {
     }
 });
 
-router.put('api/tags/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
     try {
         const [rowsUpdated] = await Tag.update({
