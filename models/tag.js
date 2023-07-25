@@ -16,7 +16,13 @@ Tag.init(
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            isAlpha: false,
+            notEmpty: true,
+                isValidProductName(value) {
+                    if (!/^[a-zA-Z\s-]+$/.test(value)) {
+                        throw new Error('Product name can only contain letters, spaces, and hyphens.');
+                    }
+                },
+                len: [1, 255], // Only allow values with length between 1 and 255
         },
         },
     },
