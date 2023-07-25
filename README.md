@@ -35,4 +35,4 @@ If you have any questions, concerns, or recommendations, you may contact me at l
 ## Links
 
 Repository: https://github.com/LCatSew/orm-commerce
-
+Walk Through Link: https://watch.screencastify.com/v/zn0YoY6Bb7IyDd25aDmx
