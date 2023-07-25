@@ -18,9 +18,18 @@ Product.init(
         product_name: {
             type: DataTypes.STRING,
             allowNull: false,
-                validate: {
-                    isAlpha: true,
+            validate: {
+                notEmpty: true,
+                isValidProductName(value) {
+                if (!/^[a-zA-Z\s]+$/.test(value)) {
+                    throw new Error('Product name can only contain letters and spaces.');
                 }
+                },
+                len: [1, 255], // Adjust the range based on your requirements
+            },
+            set(value) {
+                this.setDataValue('product_name', value.trim()); // Trim leading and trailing spaces
+            },
         },
         price: {
             type: DataTypes.DECIMAL(10, 2),

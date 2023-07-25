@@ -5,7 +5,7 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // The `/api/products` endpoint
 
 // get all products
-router.get('/api/products', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const products = await Product.findAll({
             include: [
@@ -27,7 +27,7 @@ router.get('/api/products', async (req, res) => {
 });
 
 // get one product
-router.get('/api/products/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const product= await Product.findByPk(req.params.id, {
             include: [
@@ -49,11 +49,11 @@ router.get('/api/products/:id', async (req, res) => {
 });
 
 // create new product
-router.post('/api/products', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const product = await Product.create(req.body);
         // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-        if (req.body.tagIds.length) {
+        if (req.body.tagIds && Array.isArray(req.body.tagIds) && req.body.tagIds.lengthn) {
             const productTagIdArr = req.body.tagIds.map((tag_id) => {
                 return {
                     product_id: product.id,
@@ -70,7 +70,7 @@ router.post('/api/products', async (req, res) => {
 });
 
 // update product
-router.put('/api/products/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const [rowsupdated] = await Product.update(req.body, {
             where: {
@@ -113,7 +113,7 @@ router.put('/api/products/:id', async (req, res) => {
 
 
 
-router.delete('/api/products/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
 	try{
         const deletedProduct = await Product.findByPk(req.params.id);
