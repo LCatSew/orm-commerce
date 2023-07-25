@@ -21,11 +21,11 @@ Product.init(
             validate: {
                 notEmpty: true,
                 isValidProductName(value) {
-                if (!/^[a-zA-Z\s]+$/.test(value)) {
-                    throw new Error('Product name can only contain letters and spaces.');
-                }
+                    if (!/^[a-zA-Z\s-]+$/.test(value)) {
+                        throw new Error('Product name can only contain letters, spaces, and hyphens.');
+                    }
                 },
-                len: [1, 255], // Adjust the range based on your requirements
+                len: [1, 255], // Only allow values with length between 1 and 255
             },
             set(value) {
                 this.setDataValue('product_name', value.trim()); // Trim leading and trailing spaces
